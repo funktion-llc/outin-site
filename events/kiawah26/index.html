@@ -828,44 +828,20 @@
 
   <!-- ============ MESSAGES ============ -->
   <section id="messages">
-    <div class="sec-head"><h2>Messages</h2><span class="rule"></span></div>
-    <p class="sec-lede">One thread, tied to OUTIN-001 — no digging through texts and emails. Here's how the conversation reads; the box below drafts your next message straight to John.</p>
-
-    <div class="thread" aria-label="Message thread">
-      <div class="msg">
-        <span class="av" aria-hidden="true">J</span>
-        <div class="bubble">
-          <div class="who">John · OUTIN <span>— setting the stage</span></div>
-          <p>Your project is on the board as <b>OUTIN-001</b>. Everything — plan, files, invoice — carries that tag so it's all findable in one place. Start with the quick fill-out below: just what you know now, and we'll settle the rest on our call.</p>
-        </div>
-      </div>
-      <div class="msg client">
-        <span class="av" aria-hidden="true">JK</span>
-        <div class="bubble">
-          <div class="who">Jon Klingenberg <span>— organizer</span></div>
-          <p>I'll get the basics into the quick fill-out tonight. Trip's Oct 22–24 at Kiawah, eight of us — anything I don't know yet, we can settle on the call.</p>
-        </div>
-      </div>
-      <div class="msg">
-        <span class="av" aria-hidden="true">J</span>
-        <div class="bubble">
-          <div class="who">John · OUTIN <span>— what happens next</span></div>
-          <p>Once the fill-out and call are done, the Project Plan goes in your Files for sign-off, then design starts. You'll see progress in the status tracker above and a note here when the next file lands — no surprises later.</p>
-        </div>
-      </div>
-    </div>
+    <div class="sec-head"><h2>Message John</h2><span class="rule"></span></div>
+    <p class="sec-lede">Messages land straight in John's email — he'll reply by email.</p>
 
     <div class="composer">
-      <label for="msgBox">Message John about OUTIN-001</label>
+      <label for="msgName">Your name</label><input class="txtin" id="msgName" type="text" placeholder="Your name" style="margin-bottom:10px" /><label for="msgEmail">Email (optional)</label><input class="txtin" id="msgEmail" type="email" placeholder="you@example.com" style="margin-bottom:10px" /><label for="msgBox">Your message</label>
       <textarea id="msgBox" placeholder="e.g. The group voted — net scoring, skins and Nassau, presses capped at 2×. One question: can we get a TV leaderboard at the house?"></textarea>
       <div class="actions" style="margin-top:14px">
         <button class="btn primary" id="sendMsg" type="button">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
-          Send as email
+          Send
         </button>
         <button class="btn ghost" id="copyMsg" type="button">Copy message</button>
       </div>
-      <p class="hint">Opens your email app addressed to john@outin.golf with OUTIN-001 in the subject — replies stay in the same thread as everything else.</p>
+      <p class="hint">Messages land straight in John's email — he'll reply by email.</p>
     </div>
   </section>
 
@@ -1170,7 +1146,7 @@
     if (!f.any){ showToast('Add a few details first — then send them over.'); return; }
     var subject = encodeURIComponent('OUTIN-001 · Quick fill-out · Annual Golf Trip · Kiawah Island');
     var body = encodeURIComponent('Hi John — here is the quick fill-out from the hub:\n\n' + f.text + '\n\n— sent from the OUTIN-001 client hub');
-    openMail('mailto:john@outin.golf?subject=' + subject + '&body=' + body);
+    return;
   }
   function copyBrief(){
     var f = fullBriefText();
@@ -1232,10 +1208,10 @@
   var msgBox = document.getElementById('msgBox');
   document.getElementById('sendMsg').addEventListener('click', function(){
     var msg = msgBox.value.trim();
-    if (!msg){ showToast('Write a message first — even one line does it.'); msgBox.focus(); return; }
+    if (!msg){ showToast('Add a short message first'); msgBox.focus(); return; }
     var subject = encodeURIComponent('OUTIN-001 · Annual Golf Trip · Kiawah Island');
     var body = encodeURIComponent(msg + '\n\n— via the OUTIN-001 client hub');
-    openMail('mailto:john@outin.golf?subject=' + subject + '&body=' + body);
+    return;
   });
   document.getElementById('copyMsg').addEventListener('click', function(){
     var msg = msgBox.value.trim();
@@ -1267,5 +1243,5 @@
   /* quick fill-out values are read live when sending; nothing is stored */
 })();
 </script>
-<script>(function(){var U='https://script.google.com/macros/s/AKfycbzjojelPDW8qe7oTPX4XOseToekeyfjYMX6HM2RlEVahhsTaqnkyDK81yA-YdHS7fOz/exec';function collect(){var a={},e=[];document.querySelectorAll('.spec').forEach(function(s){var h=s.querySelector('h3');var sec=h?h.textContent.trim():'Section';var vals=[];s.querySelectorAll('[aria-pressed="true"]').forEach(function(b){vals.push(b.textContent.trim());});s.querySelectorAll('input,textarea').forEach(function(i){if(i.value&&i.value.trim())vals.push(i.value.trim());});a[sec]=vals;if(!vals.length)e.push(sec);});var t=document.getElementById('toast');return{a:a,e:e};}function post(sec){var c=collect();var p={jobId:'OUTIN-001',event:'Annual Golf Trip · Kiawah Island',section:sec||'Quick fill-out',answers:c.a,emptyFields:c.e};fetch(U,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(p)});var msg=c.e.length?'Saved, a few items are still open':"Sent \u2713 we'll review on the call";try{showToast(msg);}catch(_){alert(msg);}var d=document.createElement('div');d.id='trackerStatus';d.textContent=msg;d.style.cssText='margin:12px 0;padding:10px 14px;border-radius:8px;background:#1F3A2E;color:#F4F1EC';var b=document.getElementById('sendBtn');if(b&&b.parentNode)b.parentNode.appendChild(d);}var sb=document.getElementById('sendBtn');if(sb)sb.addEventListener('click',function(){post('Quick fill-out');});var sm=document.getElementById('sendMsg');if(sm)sm.addEventListener('click',function(){post('Messages');});})();</script></body>
+<script>(function(){var U='https://script.google.com/macros/s/AKfycbzjojelPDW8qe7oTPX4XOseToekeyfjYMX6HM2RlEVahhsTaqnkyDK81yA-YdHS7fOz/exec';function collect(){var a={},e=[];document.querySelectorAll('.spec').forEach(function(s){var h=s.querySelector('h3');var sec=h?h.textContent.trim():'Section';var vals=[];s.querySelectorAll('[aria-pressed="true"]').forEach(function(b){vals.push(b.textContent.trim());});s.querySelectorAll('input,textarea').forEach(function(i){if(i.value&&i.value.trim())vals.push(i.value.trim());});a[sec]=vals;if(!vals.length)e.push(sec);});var t=document.getElementById('toast');return{a:a,e:e};}function post(sec){var c=collect();var p={jobId:'OUTIN-001',event:'Annual Golf Trip · Kiawah Island',section:sec||'Quick fill-out',answers:c.a,emptyFields:c.e};fetch(U,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(p)});var msg=c.e.length?'Saved, a few items are still open':"Sent \u2713 we'll review on the call";try{showToast(msg);}catch(_){alert(msg);}var d=document.createElement('div');d.id='trackerStatus';d.textContent=msg;d.style.cssText='margin:12px 0;padding:10px 14px;border-radius:8px;background:#1F3A2E;color:#F4F1EC';var b=document.getElementById('sendBtn');if(b&&b.parentNode)b.parentNode.appendChild(d);}var sb=document.getElementById('sendBtn');if(sb)sb.addEventListener('click',function(){post('Quick fill-out');});var sm=document.getElementById('sendMsg');if(sm)sm.addEventListener('click',function(){var n=document.getElementById('msgName');var em=document.getElementById('msgEmail');var m=document.getElementById('msgBox');var mv=m?m.value.trim():'';var er=document.getElementById('msgError');if(!er){er=document.createElement('p');er.id='msgError';er.style.cssText='color:#aa564f;font-weight:600;margin:8px 0';m.parentNode.insertBefore(er,m.nextSibling);}if(!mv){er.textContent='Add a short message first';m.focus();return;}er.textContent='';var p={jobId:'OUTIN-001',event:'Annual Golf Trip · Kiawah Island',section:'message',name:n?n.value.trim():'',email:em?em.value.trim():'',message:mv};fetch(U,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(p)});try{showToast('Sent ✓ John has it in his email');}catch(_){}er.style.color='#1F3A2E';er.textContent='Sent ✓ John has it in his email';});})();</script></body>
 </html>
